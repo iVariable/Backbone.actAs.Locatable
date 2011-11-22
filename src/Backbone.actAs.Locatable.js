@@ -33,7 +33,7 @@ Backbone.actAs.Locatable = (function(){
 
 		getLocatableID: function(){
 			if( !this._locatableID ){
-				this._locatableID = String((new Date()).getTime())+String(Math.random()).replace(/\./g,'_')+String(Math.random()).replace(/\./g,'_')+String(Math.random()).replace(/\./g,'_');
+				this._locatableID = this.cid;
 				this.getLocator().addResource( this._locatableID, this );
 			};
 			return this._locatableID;
