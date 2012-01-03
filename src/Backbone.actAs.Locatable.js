@@ -33,7 +33,7 @@ Backbone.actAs.Locatable = (function(){
 
 		getLocatableID: function(){
 			if( !this._locatableID ){
-				this._locatableID = this.cid;
+				this._locatableID = _.uniqueId('locatable');
 				this.getLocator().addResource( this._locatableID, this );
 			};
 			return this._locatableID;
@@ -50,3 +50,16 @@ Backbone.actAs.Locatable = (function(){
 	}
 
 })();
+
+Backbone.actAs.LocatableCollection = _.extend({
+
+	loadByLocatableID: function(elements){
+		_(elements).each(function(elem){
+			if( this.locateByID(elem) ){
+				this.add( this.locateByID(elem) );
+			};
+		}, this);
+		return this;
+	}
+
+},Backbone.actAs.Locatable);
